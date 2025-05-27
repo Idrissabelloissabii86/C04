@@ -9,11 +9,11 @@ int compare(const void *a, const void *b) {
 int main() {
     int n, i;
 
-    printf("Entrez le nombre d'éléments : ");
+    
     scanf("%d", &n);
 
     int arr[n];
-    printf("Entrez les éléments du tableau : ");
+    
     for (i = 0; i < n; i++) {
         scanf("%d", &arr[i]);
     }

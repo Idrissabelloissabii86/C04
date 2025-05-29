@@ -1,44 +1,37 @@
-#include <stdio.h>
+#include <stdio.h> // Pour les fonctions scanf et printf
 
 int main() {
-    int taille_tableau, index_saisie, index_unique;
+    int n, i, j;                       // n = nombre d'éléments, i/j = compteurs
+    scanf("%d", &n);                   // Lire combien d'éléments seront saisis
 
-    // Lecture de la taille du tableau
-    scanf("%d", &taille_tableau);
+    int tableau[n];                   // Tableau d’origine
+    int unique[n];                    // Tableau pour stocker les valeurs uniques
+    int taille_unique = 0;            // Compte combien de valeurs uniques
 
-    int valeurs[taille_tableau];            // Tableau pour stocker les valeurs saisies
-    int valeurs_uniques[taille_tableau];    // Tableau pour stocker les valeurs sans doublons
-    int nombre_uniques = 0;                 // Nombre d’éléments uniques ajoutés
-
-    // Saisie des éléments dans le tableau
-    for(index_saisie = 0; index_saisie < taille_tableau; index_saisie++) {
-        scanf("%d", &valeurs[index_saisie]);
+    for(i = 0; i < n; i++) {
+        scanf("%d", &tableau[i]);     // Lire chaque élément et le stocker
     }
 
-    // Traitement pour supprimer les doublons
-    for(index_saisie = 0; index_saisie < taille_tableau; index_saisie++) {
-        int est_deja_present = 0; // Indique si la valeur existe déjà dans le tableau unique
+    for(i = 0; i < n; i++) {
+        int est_doublon = 0;          // Variable pour savoir si c’est un doublon
 
-        // Vérifie si la valeur est déjà présente parmi les éléments uniques
-        for(index_unique = 0; index_unique < nombre_uniques; index_unique++) {
-            if(valeurs[index_saisie] == valeurs_uniques[index_unique]) {
-                est_deja_present = 1; // Marquer comme doublon
-                break;
+        for(j = 0; j < taille_unique; j++) {
+            if(tableau[i] == unique[j]) { // Si l’élément existe déjà dans "unique"
+                est_doublon = 1;      // On note que c’est un doublon
+                break;                // On arrête la recherche
             }
         }
 
-        // Si ce n’est pas un doublon, on l’ajoute au tableau des valeurs uniques
-        if(!est_deja_present) {
-            valeurs_uniques[nombre_uniques++] = valeurs[index_saisie];
+        if(!est_doublon) {            // Si ce n’est pas un doublon
+            unique[taille_unique++] = tableau[i]; // On l’ajoute au tableau unique
         }
     }
 
-    // Affichage du résultat sans doublons
     printf("Après suppression des doublons : ");
-    for(index_unique = 0; index_unique < nombre_uniques; index_unique++) {
-        printf("%d ", valeurs_uniques[index_unique]);
+    for(i = 0; i < taille_unique; i++) {
+        printf("%d ", unique[i]);     // Afficher chaque valeur unique
     }
-    printf("\n");
+    printf("\n");                     // Aller à la ligne après l’affichage
 
-    return 0;
+    return 0;                         // Fin normale du programme
 }
